@@ -49,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
               )
             ]),
           ),
-          backgroundColor: Color.fromRGBO(31, 31, 31, 1),
+          backgroundColor: Colors.black,
           body: TabBarView(
             children: [
               AllLeagues(),

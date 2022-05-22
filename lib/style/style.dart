@@ -7,3 +7,7 @@ appBarListTile(){
     trailing: IconButton(icon: Icon(Icons.search), onPressed: () {  }, color: Colors.white,),
   );
 }
+
+defaultWhiteTextStyle(){
+  return TextStyle(color: Colors.white);
+}
