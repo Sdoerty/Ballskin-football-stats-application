@@ -8,10 +8,10 @@ part of 'countries_model.dart';
 
 CountriesModel _$CountriesModelFromJson(Map<String, dynamic> json) =>
     CountriesModel(
-      json['id'] as int,
-      json['name'] as String,
-      json['code'] as String,
-      json['flag'] as String,
+      json['id'] as int?,
+      json['name'] as String?,
+      json['code'] as String?,
+      json['flag'] as String?,
     );
 
 Map<String, dynamic> _$CountriesModelToJson(CountriesModel instance) =>
