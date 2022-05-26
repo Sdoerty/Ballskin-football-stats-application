@@ -38,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 indicatorColor: Color.fromRGBO(56, 30, 114, 1),
                 tabs: [
               Tab(
-                child: Text('Все лиги'),
+                child: Text('Все страны'),
               ),
               Tab(
                 child: Text('Сегодня'),

@@ -8,6 +8,6 @@ appBarListTile(){
   );
 }
 
-defaultWhiteTextStyle(){
-  return TextStyle(color: Colors.white);
+countriesStyle(){
+  return TextStyle(color: Colors.white, fontSize: 18);
 }

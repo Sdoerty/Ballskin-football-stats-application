@@ -10,19 +10,13 @@ class ApiClient{
     'x-apisports-key': '613907032f09355e1df586b219657ec9',
   };
   getResponseCountries() async{
-    final request = await http.Request('GET', Uri.parse('https://v1.baseball.api-sports.io/countries'));
+    final request = await http.Request('GET', Uri.parse('https://v1.handball.api-sports.io/countries'));
     request.headers.addAll(headers);
     var streamedResponse = await request.send();
     var response = await http.Response.fromStream(streamedResponse);
     if (response.statusCode == 200) {
-      /*Map<String, dynamic> data = jsonDecode(response.body);
-
-      print(data['get']);*/
-
       final List list = jsonDecode(response.body)['response'].map((data) => CountriesModel.fromJson(data)).toList();
-
       return list;
-
     }
     else {
       throw Exception('Exception!!!!!');
