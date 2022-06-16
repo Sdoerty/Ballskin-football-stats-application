@@ -1,6 +1,6 @@
 import 'package:ballskin/style/style.dart';
 import 'package:flutter/material.dart';
-import 'pages/countries/countries.dart';
+import 'pages/countries/countries_widget.dart';
 
 void main() {
   runApp(const MainApp());

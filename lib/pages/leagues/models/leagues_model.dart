@@ -1,38 +1,56 @@
+import 'package:ballskin/pages/leagues/models/leagues_model.dart';
+import 'package:ballskin/pages/leagues/models/leagues_model.dart';
+import 'package:ballskin/pages/leagues/models/leagues_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'leagues_model.g.dart';
 
+@JsonSerializable(explicitToJson: true)
+class Leagues {
+  Leagues({
+    required this.league,
+    required this.country,
+  });
+
+  League league;
+  Country country;
+
+  factory Leagues.fromJson(Map<String, dynamic> json) => _$LeaguesFromJson(json);
+  Map<String, dynamic> toJson() => _$LeaguesToJson(this);
+}
+
 @JsonSerializable()
 class League {
-  int leagueId;
+  League({
+    required this.id,
+    required this.name,
+    required this.type,
+    required this.logo,
+  });
+
+  int id;
   String name;
   String type;
-  String country;
-  String countryCode;
-  int season;
-  String seasonStart;
-  String seasonEnd;
   String logo;
-  String flag;
-  int standings;
-  int isCurrent;
-
-  League(
-      this.leagueId,
-        this.name,
-        this.type,
-        this.country,
-        this.countryCode,
-        this.season,
-        this.seasonStart,
-        this.seasonEnd,
-        this.logo,
-        this.flag,
-        this.standings,
-        this.isCurrent);
 
   factory League.fromJson(Map<String, dynamic> json) => _$LeagueFromJson(json);
   Map<String, dynamic> toJson() => _$LeagueToJson(this);
-
-
 }
+
+@JsonSerializable()
+class Country {
+  Country({
+    required this.name,
+    required this.code,
+    required this.flag,
+  });
+
+  String name;
+  final String? code;
+  final String? flag;
+
+  factory Country.fromJson(Map<String, dynamic> json) => _$CountryFromJson(json);
+  Map<String, dynamic> toJson() => _$CountryToJson(this);
+}
+
+
 

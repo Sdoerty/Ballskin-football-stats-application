@@ -16,13 +16,13 @@ class _CountriesState extends State<Countries> {
   @override
   void initState() {
     super.initState();
-    apiClient.getResponseCountries();
+    apiClient.getResponseLeagueByCountry();
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: apiClient.getResponseCountries(),
+        future: apiClient.getResponseLeagueByCountry(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasData) {
@@ -46,18 +46,18 @@ class _CountriesState extends State<Countries> {
                           ),
                           child: Row(
                             children: [
-                              Container(
+                              /*Container(
                                   height: 100,
                                   width: 120,
                                   child: FittedBox(
                                     child: SvgPicture.network(
                                         snapshot.data[index].flag),
                                     fit: BoxFit.fill,
-                                  )),
+                                  )),*/
                               SizedBox(
                                 width: 10,
                               ),
-                              Text("${snapshot.data[index].name}", style: countriesStyle(),)
+                              Text("${snapshot.data[index].league.name}", style: countriesStyle(),)
                             ],
                           ),
                         ),
