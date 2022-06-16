@@ -1,28 +1,29 @@
 import 'package:ballskin/api/service.dart';
 import 'package:ballskin/style/style.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class Countries extends StatefulWidget {
-  const Countries({Key? key}) : super(key: key);
+class LegauesWidget extends StatefulWidget {
+  const LegauesWidget({Key? key}) : super(key: key);
 
   @override
-  State<Countries> createState() => _CountriesState();
+  State<LegauesWidget> createState() => _CountriesState();
 }
 
-class _CountriesState extends State<Countries> {
+class _CountriesState extends State<LegauesWidget> {
   final apiClient = ApiClient();
 
   @override
   void initState() {
     super.initState();
-    apiClient.getResponseLeagueByCountry();
+    apiClient.getLeagueByCountry();
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: apiClient.getResponseLeagueByCountry(),
+        future: apiClient.getLeagueByCountry(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasData) {
@@ -37,7 +38,7 @@ class _CountriesState extends State<Countries> {
                         shape: RoundedRectangleBorder(
                             side: BorderSide(color: Colors.white, width: 2),
                             borderRadius:
-                            BorderRadius.all(Radius.circular(10.0))),
+                                BorderRadius.all(Radius.circular(10.0))),
                         color: Color.fromRGBO(28, 27, 31, 1),
                         child: ClipRRect(
                           borderRadius: BorderRadius.only(
@@ -46,18 +47,22 @@ class _CountriesState extends State<Countries> {
                           ),
                           child: Row(
                             children: [
-                              /*Container(
+                              Container(
                                   height: 100,
                                   width: 120,
-                                  child: FittedBox(
-                                    child: SvgPicture.network(
-                                        snapshot.data[index].flag),
-                                    fit: BoxFit.fill,
-                                  )),*/
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(15.0),
+                                    child: Image.network(
+                                        "${snapshot.data[index].league.logo}"),
+                                  )),
                               SizedBox(
                                 width: 10,
                               ),
-                              Text("${snapshot.data[index].league.name}", style: countriesStyle(),)
+                              Flexible(
+                                  child: Text(
+                                "${snapshot.data[index].league.name}",
+                                style: countriesStyle(),
+                              ))
                             ],
                           ),
                         ),

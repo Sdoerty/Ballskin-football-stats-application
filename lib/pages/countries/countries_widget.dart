@@ -3,26 +3,26 @@ import 'package:ballskin/style/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class Countries extends StatefulWidget {
-  const Countries({Key? key}) : super(key: key);
+class CountriesWidget extends StatefulWidget {
+  const CountriesWidget({Key? key}) : super(key: key);
 
   @override
-  State<Countries> createState() => _CountriesState();
+  State<CountriesWidget> createState() => _CountriesState();
 }
 
-class _CountriesState extends State<Countries> {
+class _CountriesState extends State<CountriesWidget> {
   final apiClient = ApiClient();
 
   @override
   void initState() {
     super.initState();
-    apiClient.getResponseCountries();
+    apiClient.getCountries();
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: apiClient.getResponseCountries(),
+        future: apiClient.getCountries(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasData) {
@@ -47,17 +47,17 @@ class _CountriesState extends State<Countries> {
                           child: Row(
                             children: [
                               Container(
-                                  height: 100,
+                                  height: 90,
                                   width: 120,
                                   child: FittedBox(
                                     child: SvgPicture.network(
                                         snapshot.data[index].flag),
-                                    fit: BoxFit.fill,
                                   )),
                               SizedBox(
                                 width: 10,
                               ),
-                              Text("${snapshot.data[index].name}", style: countriesStyle(),)
+                              Flexible(
+                                  child: Text("${snapshot.data[index].name}", style: countriesStyle(),))
                             ],
                           ),
                         ),

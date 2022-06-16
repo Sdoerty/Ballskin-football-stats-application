@@ -16,7 +16,7 @@ class ApiClient{
     'country' : 'England'
   };*/
 
-  getResponseCountries() async{
+  getCountries() async{
     final request = await http.Request('GET', Uri.parse('https://v3.football.api-sports.io/countries'));
     request.headers.addAll(headers);
     var streamedResponse = await request.send();
@@ -32,7 +32,7 @@ class ApiClient{
 
   // ?country=England&season=2021
 
-  getResponseLeagueByCountry() async{
+  getLeagueByCountry() async{
     final request = await http.Request('GET', Uri.parse('https://v3.football.api-sports.io/leagues'));
     request.headers.addAll(headers);
     // request.bodyFields.addAll(params);

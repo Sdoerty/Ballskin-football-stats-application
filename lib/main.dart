@@ -1,6 +1,7 @@
 import 'package:ballskin/style/style.dart';
 import 'package:flutter/material.dart';
 import 'pages/countries/countries_widget.dart';
+import 'pages/leagues/leagues_widget.dart';
 
 void main() {
   runApp(const MainApp());
@@ -51,8 +52,8 @@ class _MyHomePageState extends State<MyHomePage> {
           backgroundColor: Colors.black,
           body: TabBarView(
             children: [
-              Countries(),
-              Text('Сегодня'),
+              CountriesWidget(),
+              LegauesWidget(), // Временно
               Text('Сейчас'),
             ],
           ),
