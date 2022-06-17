@@ -32,15 +32,14 @@ class ApiClient{
 
   // ?country=England&season=2021
 
-  getLeagueByCountry() async{
-    final request = await http.Request('GET', Uri.parse('https://v3.football.api-sports.io/leagues'));
+  getLeagueByCountry(String country) async{
+    final request = await http.Request('GET', Uri.parse('https://v3.football.api-sports.io/leagues?country=$country&season=2021'));
     request.headers.addAll(headers);
     // request.bodyFields.addAll(params);
     var streamedResponse = await request.send();
     var response = await http.Response.fromStream(streamedResponse);
     if (response.statusCode == 200) {
       final List list = jsonDecode(response.body)['response'].map((data) => Leagues.fromJson(data)).toList();
-      print(list);
       return list;
     }
     else {

@@ -53,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
           body: TabBarView(
             children: [
               CountriesWidget(),
-              LegauesWidget(), // Временно
+              Text('Сегодня'),// Временно
               Text('Сейчас'),
             ],
           ),

@@ -1,4 +1,5 @@
 import 'package:ballskin/api/service.dart';
+import 'package:ballskin/pages/leagues/leagues_widget.dart';
 import 'package:ballskin/style/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -32,33 +33,36 @@ class _CountriesState extends State<CountriesWidget> {
                     shrinkWrap: true,
                     itemCount: snapshot.data.length,
                     itemBuilder: (BuildContext context, index) {
-                      return Card(
-                        borderOnForeground: true,
-                        shape: RoundedRectangleBorder(
-                          side: BorderSide(color: Colors.white, width: 2),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.0))),
-                        color: Color.fromRGBO(28, 27, 31, 1),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10.0),
-                            bottomLeft: Radius.circular(10.0),
-                          ),
-                          child: Row(
-                            children: [
-                              Container(
-                                  height: 90,
-                                  width: 120,
-                                  child: FittedBox(
-                                    child: SvgPicture.network(
-                                        snapshot.data[index].flag),
-                                  )),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Flexible(
-                                  child: Text("${snapshot.data[index].name}", style: countriesStyle(),))
-                            ],
+                      return GestureDetector(
+                        onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => LegauesWidget(countryName: snapshot.data[index].name))),
+                        child: Card(
+                          borderOnForeground: true,
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(color: Colors.white, width: 2),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0))),
+                          color: Color.fromRGBO(28, 27, 31, 1),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(10.0),
+                              bottomLeft: Radius.circular(10.0),
+                            ),
+                            child: Row(
+                              children: [
+                                Container(
+                                    height: 90,
+                                    width: 120,
+                                    child: FittedBox(
+                                      child: SvgPicture.network(
+                                          snapshot.data[index].flag),
+                                    )),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Flexible(
+                                    child: Text("${snapshot.data[index].name}", style: countriesStyle(),))
+                              ],
+                            ),
                           ),
                         ),
                       );
