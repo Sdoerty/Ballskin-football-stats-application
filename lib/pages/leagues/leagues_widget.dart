@@ -33,7 +33,7 @@ class _CountriesState extends State<LegauesWidget> {
               return Scaffold(
                 appBar: AppBar(
                   backgroundColor: Color.fromRGBO(28, 27, 31, 1),
-                  title: Text('${widget.countryName} - соревнования'),
+                  title: Text('${widget.countryName} - все лиги'),
                   centerTitle: true,
                 ),
                 backgroundColor: Colors.black,
