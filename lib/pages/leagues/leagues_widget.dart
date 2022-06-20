@@ -1,9 +1,7 @@
 import 'package:ballskin/api/service.dart';
-import 'package:ballskin/pages/countries/model/countries_model.dart';
+import 'package:ballskin/pages/teams/teams_widget.dart';
 import 'package:ballskin/style/style.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class LegauesWidget extends StatefulWidget {
   const LegauesWidget({Key? key, required this.countryName}) : super(key: key);
@@ -20,13 +18,13 @@ class _CountriesState extends State<LegauesWidget> {
   @override
   void initState() {
     super.initState();
-    apiClient.getLeagueByCountry(widget.countryName);
+    apiClient.getLeaguesByCountry(widget.countryName);
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: apiClient.getLeagueByCountry(widget.countryName),
+        future: apiClient.getLeaguesByCountry(widget.countryName),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasData) {
@@ -43,37 +41,47 @@ class _CountriesState extends State<LegauesWidget> {
                       shrinkWrap: true,
                       itemCount: snapshot.data.length,
                       itemBuilder: (BuildContext context, index) {
-                        return Card(
-                          borderOnForeground: true,
-                          shape: RoundedRectangleBorder(
-                              side: BorderSide(color: Colors.white, width: 2),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0))),
-                          color: Color.fromRGBO(28, 27, 31, 1),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(10.0),
-                              bottomLeft: Radius.circular(10.0),
-                            ),
-                            child: Row(
-                              children: [
-                                Container(
-                                    height: 100,
-                                    width: 120,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(15.0),
-                                      child: Image.network(
-                                          "${snapshot.data[index].league.logo}"),
-                                    )),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Flexible(
-                                    child: Text(
-                                  "${snapshot.data[index].league.name}",
-                                  style: countriesStyle(),
-                                ))
-                              ],
+                        return GestureDetector(
+                          onTap: () =>
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => TeamsWidget(
+                                        leagueId:
+                                            snapshot.data[index].league.id,
+                                        leagueName:
+                                            snapshot.data[index].league.name,
+                                      ))),
+                          child: Card(
+                            borderOnForeground: true,
+                            shape: RoundedRectangleBorder(
+                                side: BorderSide(color: Colors.white, width: 2),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10.0))),
+                            color: Color.fromRGBO(28, 27, 31, 1),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(10.0),
+                                bottomLeft: Radius.circular(10.0),
+                              ),
+                              child: Row(
+                                children: [
+                                  Container(
+                                      height: 100,
+                                      width: 120,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(15.0),
+                                        child: Image.network(
+                                            "${snapshot.data[index].league.logo}"),
+                                      )),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Flexible(
+                                      child: Text(
+                                    "${snapshot.data[index].league.name}",
+                                    style: countriesStyle(),
+                                  ))
+                                ],
+                              ),
                             ),
                           ),
                         );

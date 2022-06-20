@@ -1,6 +1,3 @@
-import 'package:ballskin/pages/leagues/models/leagues_model.dart';
-import 'package:ballskin/pages/leagues/models/leagues_model.dart';
-import 'package:ballskin/pages/leagues/models/leagues_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'leagues_model.g.dart';
 
