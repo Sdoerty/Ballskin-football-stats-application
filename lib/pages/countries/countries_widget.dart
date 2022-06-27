@@ -17,13 +17,13 @@ class _CountriesState extends State<CountriesWidget> {
   @override
   void initState() {
     super.initState();
-    apiClient.getCountries();
+    apiClient.fetchCountries();
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: apiClient.getCountries(),
+        future: apiClient.fetchCountries(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasData) {
@@ -34,7 +34,7 @@ class _CountriesState extends State<CountriesWidget> {
                     itemCount: snapshot.data.length,
                     itemBuilder: (BuildContext context, index) {
                       return GestureDetector(
-                        onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => LegauesWidget(countryName: snapshot.data[index].name))),
+                        // onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => LegauesWidget(countryName: snapshot.data[index].name))),
                         child: Card(
                           borderOnForeground: true,
                           shape: RoundedRectangleBorder(
@@ -47,21 +47,14 @@ class _CountriesState extends State<CountriesWidget> {
                               topLeft: Radius.circular(10.0),
                               bottomLeft: Radius.circular(10.0),
                             ),
-                            child: Row(
-                              children: [
-                                Container(
-                                    height: 90,
-                                    width: 120,
-                                    child: FittedBox(
-                                      child: SvgPicture.network(
-                                          snapshot.data[index].flag),
-                                    )),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Flexible(
-                                    child: Text("${snapshot.data[index].name}", style: countriesStyle(),))
-                              ],
+                            child: Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: Row(
+                                children: [
+                                  Flexible(
+                                      child: Text("${snapshot.data[index]["name"]}", style: countriesStyle(),))
+                                ],
+                              ),
                             ),
                           ),
                         ),

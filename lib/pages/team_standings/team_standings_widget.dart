@@ -1,9 +1,10 @@
+/*
 import 'package:ballskin/api/service.dart';
 import 'package:ballskin/style/style.dart';
 import 'package:flutter/material.dart';
 
-class TeamsWidget extends StatefulWidget {
-  const TeamsWidget(
+class TeamStandingWidget extends StatefulWidget {
+  const TeamStandingWidget(
       {Key? key, required this.leagueId, required this.leagueName})
       : super(key: key);
 
@@ -11,22 +12,22 @@ class TeamsWidget extends StatefulWidget {
   final String leagueName;
 
   @override
-  State<TeamsWidget> createState() => _CountriesState();
+  State<TeamStandingWidget> createState() => _CountriesState();
 }
 
-class _CountriesState extends State<TeamsWidget> {
+class _CountriesState extends State<TeamStandingWidget> {
   final apiClient = ApiClient();
 
   @override
   void initState() {
     super.initState();
-    apiClient.getTeamsByCountry(widget.leagueId);
+    apiClient.getTeamsByLeague(widget.leagueId);
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: apiClient.getTeamsByCountry(widget.leagueId),
+        future: apiClient.getTeamsByLeague(widget.leagueId),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasData) {
@@ -57,22 +58,24 @@ class _CountriesState extends State<TeamsWidget> {
                             ),
                             child: Row(
                               children: [
-                                Container(
+*/
+/*                                Container(
                                     height: 100,
                                     width: 120,
                                     child: Padding(
                                       padding: const EdgeInsets.all(15.0),
                                       child: Image.network(
                                           "${snapshot.data[index].team.logo}"),
-                                    )),
+                                    )),*//*
+
                                 SizedBox(
                                   width: 10,
                                 ),
                                 Flexible(
                                     child: Text(
-                                  "${snapshot.data[index].team.name}",
-                                  style: countriesStyle(),
-                                ))
+                                      "${snapshot.data[index].league.name}",
+                                      style: countriesStyle(),
+                                    ))
                               ],
                             ),
                           ),
@@ -98,3 +101,4 @@ class _CountriesState extends State<TeamsWidget> {
         });
   }
 }
+*/

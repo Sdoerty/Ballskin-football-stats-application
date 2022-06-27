@@ -1,3 +1,4 @@
+/*
 import 'package:json_annotation/json_annotation.dart';
 part 'leagues_model.g.dart';
 
@@ -51,3 +52,4 @@ class Country {
 
 
 
+*/

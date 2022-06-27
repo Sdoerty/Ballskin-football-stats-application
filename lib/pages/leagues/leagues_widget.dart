@@ -1,5 +1,6 @@
+/*
 import 'package:ballskin/api/service.dart';
-import 'package:ballskin/pages/teams/teams_widget.dart';
+import 'package:ballskin/pages/team_standings/team_standings_widget.dart';
 import 'package:ballskin/style/style.dart';
 import 'package:flutter/material.dart';
 
@@ -44,7 +45,7 @@ class _CountriesState extends State<LegauesWidget> {
                         return GestureDetector(
                           onTap: () =>
                               Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => TeamsWidget(
+                                  builder: (context) => TeamStandingWidget(
                                         leagueId:
                                             snapshot.data[index].league.id,
                                         leagueName:
@@ -106,3 +107,4 @@ class _CountriesState extends State<LegauesWidget> {
         });
   }
 }
+*/

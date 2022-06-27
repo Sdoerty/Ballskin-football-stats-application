@@ -1,3 +1,4 @@
+/*
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 part of 'leagues_model.dart';
@@ -41,3 +42,4 @@ Map<String, dynamic> _$CountryToJson(Country instance) => <String, dynamic>{
       'code': instance.code,
       'flag': instance.flag,
     };
+*/
