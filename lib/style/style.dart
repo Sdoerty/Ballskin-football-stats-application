@@ -21,5 +21,5 @@ subtitleStyle(){
 }
 
 teamsStyle(){
-  return TextStyle(color: Colors.white, fontSize: 13);
+  return TextStyle(color: Colors.white, fontSize: 14);
 }
