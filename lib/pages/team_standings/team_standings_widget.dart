@@ -45,6 +45,65 @@ class _CountriesState extends State<TeamStandingWidget> {
             ],
           ),
           centerTitle: true,
+          bottom: PreferredSize(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 17),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Container(
+                      width: 25,
+                      child: Text(
+                        "M",
+                        style: teamsStyle(),
+                      ),
+                    ),
+                    Container(
+                      width: 25,
+                      child: Text(
+                        "W",
+                        style: teamsStyle(),
+                      ),
+                    ),
+                    Container(
+                      width: 25,
+                      child: Text(
+                        "D",
+                        style: teamsStyle(),
+                      ),
+                    ),
+                    Container(
+                      width: 25,
+                      child: Text(
+                        "L",
+                        style: teamsStyle(),
+                      ),
+                    ),
+                    Container(
+                      width: 45,
+                      child: Text(
+                        "GS-GC",
+                        style: teamsStyle(),
+                      ),
+                    ),
+                    Container(
+                      width: 27,
+                      child: Text(
+                        "GD",
+                        style: teamsStyle(),
+                      ),
+                    ),
+                    Container(
+                      width: 25,
+                      child: Text(
+                        "P",
+                        style: teamsStyle(),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              preferredSize: Size.fromHeight(30)),
         ),
         backgroundColor: Colors.black,
         body: FutureBuilder(
@@ -68,19 +127,84 @@ class _CountriesState extends State<TeamStandingWidget> {
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Row(
+                                child: Column(
                                   children: [
-                                    Flexible(
-                                      child: ListTile(
-                                        leading: Text(
-                                          "${snapshot.data[index]["rank"]}",
-                                          style: countriesStyle(),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Container(
+                                              width: 25,
+                                              child: Text(
+                                                "${snapshot.data[index]["rank"]}",
+                                                style: teamsStyle(),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 150,
+                                              child: Text(
+                                                "${snapshot.data[index]["name"]}",
+                                                style: teamsStyle(),
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                        title: Text(
-                                          "${snapshot.data[index]["name"]}",
-                                          style: countriesStyle(),
-                                        ),
-                                      ),
+                                        Row(
+                                          children: [
+                                            Container(
+                                              width: 25,
+                                              child: Text(
+                                                "${snapshot.data[index]["matches"]}",
+                                                style: teamsStyle(),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 25,
+                                              child: Text(
+                                                "${snapshot.data[index]["won"]}",
+                                                style: teamsStyle(),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 25,
+                                              child: Text(
+                                                "${snapshot.data[index]["drawn"]}",
+                                                style: teamsStyle(),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 25,
+                                              child: Text(
+                                                "${snapshot.data[index]["lost"]}",
+                                                style: teamsStyle(),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 45,
+                                              child: Text(
+                                                "${snapshot.data[index]["goals_scored"]}-${snapshot.data[index]["goals_conceded"]}",
+                                                style: teamsStyle(),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 25,
+                                              child: Text(
+                                                "${snapshot.data[index]["goal_diff"]}",
+                                                style: teamsStyle(),
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 25,
+                                              child: Text(
+                                                "${snapshot.data[index]["points"]}",
+                                                style: teamsStyle(),
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      ],
                                     )
                                   ],
                                 ),

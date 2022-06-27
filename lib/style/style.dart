@@ -19,3 +19,7 @@ leaguesStyle(){
 subtitleStyle(){
   return TextStyle(color: Colors.white, fontSize: 16);
 }
+
+teamsStyle(){
+  return TextStyle(color: Colors.white, fontSize: 13);
+}
