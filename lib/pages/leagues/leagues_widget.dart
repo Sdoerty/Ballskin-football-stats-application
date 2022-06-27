@@ -1,12 +1,14 @@
-/*
 import 'package:ballskin/api/service.dart';
 import 'package:ballskin/pages/team_standings/team_standings_widget.dart';
 import 'package:ballskin/style/style.dart';
 import 'package:flutter/material.dart';
 
 class LegauesWidget extends StatefulWidget {
-  const LegauesWidget({Key? key, required this.countryName}) : super(key: key);
+  const LegauesWidget(
+      {Key? key, required this.countryId, required this.countryName})
+      : super(key: key);
 
+  final countryId;
   final String countryName;
 
   @override
@@ -19,13 +21,14 @@ class _CountriesState extends State<LegauesWidget> {
   @override
   void initState() {
     super.initState();
-    apiClient.getLeaguesByCountry(widget.countryName);
+    widget.countryName;
+    apiClient.fetchLeagues(widget.countryId);
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: apiClient.getLeaguesByCountry(widget.countryName),
+        future: apiClient.fetchLeagues(widget.countryId),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasData) {
@@ -43,14 +46,14 @@ class _CountriesState extends State<LegauesWidget> {
                       itemCount: snapshot.data.length,
                       itemBuilder: (BuildContext context, index) {
                         return GestureDetector(
-                          onTap: () =>
+                          /*onTap: () =>
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => TeamStandingWidget(
                                         leagueId:
                                             snapshot.data[index].league.id,
                                         leagueName:
                                             snapshot.data[index].league.name,
-                                      ))),
+                                      )))*/
                           child: Card(
                             borderOnForeground: true,
                             shape: RoundedRectangleBorder(
@@ -63,25 +66,17 @@ class _CountriesState extends State<LegauesWidget> {
                                 topLeft: Radius.circular(10.0),
                                 bottomLeft: Radius.circular(10.0),
                               ),
-                              child: Row(
-                                children: [
-                                  Container(
-                                      height: 100,
-                                      width: 120,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(15.0),
-                                        child: Image.network(
-                                            "${snapshot.data[index].league.logo}"),
-                                      )),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Flexible(
-                                      child: Text(
-                                    "${snapshot.data[index].league.name}",
-                                    style: countriesStyle(),
-                                  ))
-                                ],
+                              child: Padding(
+                                padding: const EdgeInsets.all(35.0),
+                                child: Row(
+                                  children: [
+                                    Flexible(
+                                        child: Text(
+                                      "${snapshot.data[index]["name"]}",
+                                      style: leaguesStyle(),
+                                    ))
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -107,4 +102,3 @@ class _CountriesState extends State<LegauesWidget> {
         });
   }
 }
-*/

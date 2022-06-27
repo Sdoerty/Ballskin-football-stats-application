@@ -11,3 +11,7 @@ appBarListTile(){
 countriesStyle(){
   return TextStyle(color: Colors.white, fontSize: 18);
 }
+
+leaguesStyle(){
+  return TextStyle(color: Colors.white, fontSize: 24);
+}

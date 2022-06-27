@@ -34,7 +34,7 @@ class _CountriesState extends State<CountriesWidget> {
                     itemCount: snapshot.data.length,
                     itemBuilder: (BuildContext context, index) {
                       return GestureDetector(
-                        // onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => LegauesWidget(countryName: snapshot.data[index].name))),
+                        onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => LegauesWidget(countryId: snapshot.data[index]["id"], countryName: snapshot.data[index]["name"],))),
                         child: Card(
                           borderOnForeground: true,
                           shape: RoundedRectangleBorder(

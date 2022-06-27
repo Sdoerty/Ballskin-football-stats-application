@@ -1,55 +1,73 @@
-/*
-import 'package:json_annotation/json_annotation.dart';
-part 'leagues_model.g.dart';
+// To parse this JSON data, do
+//
+//     final leagueData = leagueDataFromJson(jsonString);
 
-@JsonSerializable(explicitToJson: true)
-class Leagues {
-  Leagues({
-    required this.league,
-    required this.country,
+import 'dart:convert';
+
+LeagueData leagueDataFromJson(String str) => LeagueData.fromJson(json.decode(str));
+
+String leagueDataToJson(LeagueData data) => json.encode(data.toJson());
+
+class LeagueData {
+  LeagueData({
+    required this.success,
+    required this.data,
   });
 
-  League league;
-  Country country;
+  bool success;
+  Data data;
 
-  factory Leagues.fromJson(Map<String, dynamic> json) => _$LeaguesFromJson(json);
-  Map<String, dynamic> toJson() => _$LeaguesToJson(this);
+  factory LeagueData.fromJson(Map<String, dynamic> json) => LeagueData(
+    success: json["success"],
+    data: Data.fromJson(json["data"]),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "success": success,
+    "data": data.toJson(),
+  };
 }
 
-@JsonSerializable()
+class Data {
+  Data({
+    required this.league,
+  });
+
+  List<League> league;
+
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
+    league: List<League>.from(json["league"].map((x) => League.fromJson(x))),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "league": List<dynamic>.from(league.map((x) => x.toJson())),
+  };
+}
+
 class League {
   League({
     required this.id,
     required this.name,
-    required this.type,
-    required this.logo,
+    required this.countryId,
+    required this.scores,
   });
 
-  int id;
+  String id;
   String name;
-  String type;
-  String logo;
+  String countryId;
+  String scores;
 
-  factory League.fromJson(Map<String, dynamic> json) => _$LeagueFromJson(json);
-  Map<String, dynamic> toJson() => _$LeagueToJson(this);
+  factory League.fromJson(Map<String, dynamic> json) => League(
+    id: json["id"],
+    name: json["name"],
+    countryId: json["country_id"],
+    scores: json["scores"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "name": name,
+    "country_id": countryId,
+    "scores": scores,
+  };
 }
-
-@JsonSerializable()
-class Country {
-  Country({
-    required this.name,
-    required this.code,
-    required this.flag,
-  });
-
-  String name;
-  final String? code;
-  final String? flag;
-
-  factory Country.fromJson(Map<String, dynamic> json) => _$CountryFromJson(json);
-  Map<String, dynamic> toJson() => _$CountryToJson(this);
-}
-
-
-
-*/
