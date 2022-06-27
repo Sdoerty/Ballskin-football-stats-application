@@ -20,11 +20,11 @@ class ApiClient{
   }
 
   fetchLeagues(country_id) async{
-    final url = Uri.parse('https://livescore-api.com/api-client/leagues/list.json?&key=$_apiKey&secret=$_secretApiKey&country=$country_id');
+    final url = Uri.parse('https://livescore-api.com/api-client/competitions/list.json&key=$_apiKey&secret=$_secretApiKey&country_id=$country_id');
     final response = await http.get(url);
 
     if(response.statusCode == 200) {
-      final parsedJson = jsonDecode(response.body)["data"]["league"];
+      final parsedJson = jsonDecode(response.body)["data"]["competition"];
       return parsedJson;
     }else{
       throw Exception('SHIT!!!');
