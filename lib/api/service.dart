@@ -12,10 +12,10 @@ class ApiClient{
     final response = await http.get(url);
 
     if(response.statusCode == 200) {
-      final parsedJson = jsonDecode(response.body)["data"]["country"];
+      final List parsedJson = jsonDecode(response.body)["data"]["country"];
       return parsedJson;
     }else{
-      throw Exception('SHIT!!!');
+      throw Exception('Exception');
     }
   }
 
@@ -24,10 +24,22 @@ class ApiClient{
     final response = await http.get(url);
 
     if(response.statusCode == 200) {
-      final parsedJson = jsonDecode(response.body)["data"]["competition"];
+      final List parsedJson = jsonDecode(response.body)["data"]["competition"];
       return parsedJson;
     }else{
-      throw Exception('SHIT!!!');
+      throw Exception('Exception');
+    }
+  }
+
+  fetchStandings(competition_id, season_id) async{
+    final url = Uri.parse('https://livescore-api.com/api-client/leagues/table.json?competition_id=$competition_id&key=$_apiKey&secret=$_secretApiKey&season_id=$season_id');
+    final response = await http.get(url);
+
+    if(response.statusCode == 200) {
+      final List parsedJson = jsonDecode(response.body)["data"]["table"];
+      return parsedJson;
+    }else{
+      throw Exception('Exception');
     }
   }
 }

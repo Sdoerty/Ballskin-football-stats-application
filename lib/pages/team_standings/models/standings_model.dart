@@ -1,109 +1,129 @@
 // To parse this JSON data, do
 //
-//     final teamStandings = teamStandingsFromJson(jsonString);
+//     final standingsData = standingsDataFromJson(jsonString);
 
 import 'dart:convert';
 
-List<TeamStandings> teamStandingsFromJson(String str) => List<TeamStandings>.from(json.decode(str).map((x) => TeamStandings.fromJson(x)));
+StandingsData standingsDataFromJson(String str) => StandingsData.fromJson(json.decode(str));
 
-String teamStandingsToJson(List<TeamStandings> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String standingsDataToJson(StandingsData data) => json.encode(data.toJson());
 
-class TeamStandings {
-  TeamStandings({
-    required this.league,
+class StandingsData {
+  StandingsData({
+    required this.success,
+    required this.data,
   });
 
-  League league;
+  bool success;
+  Data data;
 
-  factory TeamStandings.fromJson(Map<String, dynamic> json) => TeamStandings(
-    league: League.fromJson(json["league"]),
+  factory StandingsData.fromJson(Map<String, dynamic> json) => StandingsData(
+    success: json["success"],
+    data: Data.fromJson(json["data"]),
   );
 
   Map<String, dynamic> toJson() => {
-    "league": league.toJson(),
+    "success": success,
+    "data": data.toJson(),
   };
 }
 
-class League {
-  League({
-    required this.id,
+class Data {
+  Data({
+    required this.table,
+  });
+
+  List<Table> table;
+
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
+    table: List<Table>.from(json["table"].map((x) => Table.fromJson(x))),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "table": List<dynamic>.from(table.map((x) => x.toJson())),
+  };
+}
+
+class Table {
+  Table({
+    required this.leagueId,
+    required this.seasonId,
     required this.name,
-    required this.country,
-    required this.logo,
-    required this.flag,
-    required this.season,
-    required this.standings,
-  });
-
-  int id;
-  String name;
-  String country;
-  String logo;
-  String flag;
-  int season;
-  Standings standings;
-
-  factory League.fromJson(Map<String, dynamic> json) => League(
-    id: json["id"],
-    name: json["name"],
-    country: json["country"],
-    logo: json["logo"],
-    flag: json["flag"],
-    season: json["season"],
-    standings: Standings.fromJson(json["standings"]),
-  );
-
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-    "country": country,
-    "logo": logo,
-    "flag": flag,
-    "season": season,
-    "standings": standings.toJson(),
-  };
-}
-
-class Standings {
-  Standings({
     required this.rank,
-    required this.team,
+    required this.points,
+    required this.matches,
+    required this.goalDiff,
+    required this.goalsScored,
+    required this.goalsConceded,
+    required this.lost,
+    required this.drawn,
+    required this.won,
+    required this.teamId,
+    required this.competitionId,
+    required this.groupId,
+    required this.groupName,
+    required this.stageName,
+    required this.stageId,
   });
 
-  int rank;
-  Team team;
-
-  factory Standings.fromJson(Map<String, dynamic> json) => Standings(
-    rank: json["rank"],
-    team: Team.fromJson(json["team"]),
-  );
-
-  Map<String, dynamic> toJson() => {
-    "rank": rank,
-    "team": team.toJson(),
-  };
-}
-
-class Team {
-  Team({
-    required this.id,
-    required this.name,
-    required this.logo,
-  });
-
-  int id;
+  String leagueId;
+  String seasonId;
   String name;
-  String logo;
+  String rank;
+  String points;
+  String matches;
+  String goalDiff;
+  String goalsScored;
+  String goalsConceded;
+  String lost;
+  String drawn;
+  String won;
+  String teamId;
+  String competitionId;
+  String groupId;
+  String groupName;
+  String stageName;
+  String stageId;
 
-  factory Team.fromJson(Map<String, dynamic> json) => Team(
-    id: json["id"],
+  factory Table.fromJson(Map<String, dynamic> json) => Table(
+    leagueId: json["league_id"],
+    seasonId: json["season_id"],
     name: json["name"],
-    logo: json["logo"],
+    rank: json["rank"],
+    points: json["points"],
+    matches: json["matches"],
+    goalDiff: json["goal_diff"],
+    goalsScored: json["goals_scored"],
+    goalsConceded: json["goals_conceded"],
+    lost: json["lost"],
+    drawn: json["drawn"],
+    won: json["won"],
+    teamId: json["team_id"],
+    competitionId: json["competition_id"],
+    groupId: json["group_id"],
+    groupName: json["group_name"],
+    stageName: json["stage_name"],
+    stageId: json["stage_id"],
   );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
+    "league_id": leagueId,
+    "season_id": seasonId,
     "name": name,
-    "logo": logo,
+    "rank": rank,
+    "points": points,
+    "matches": matches,
+    "goal_diff": goalDiff,
+    "goals_scored": goalsScored,
+    "goals_conceded": goalsConceded,
+    "lost": lost,
+    "drawn": drawn,
+    "won": won,
+    "team_id": teamId,
+    "competition_id": competitionId,
+    "group_id": groupId,
+    "group_name": groupName,
+    "stage_name": stageName,
+    "stage_id": stageId,
   };
 }

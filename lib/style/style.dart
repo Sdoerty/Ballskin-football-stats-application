@@ -13,5 +13,9 @@ countriesStyle(){
 }
 
 leaguesStyle(){
-  return TextStyle(color: Colors.white, fontSize: 24);
+  return TextStyle(color: Colors.white, fontSize: 21);
+}
+
+subtitleStyle(){
+  return TextStyle(color: Colors.white, fontSize: 16);
 }
