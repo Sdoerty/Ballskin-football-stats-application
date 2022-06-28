@@ -1,7 +1,9 @@
 import 'package:ballskin/api/service.dart';
-import 'package:ballskin/pages/team_standings/team_standings_widget.dart';
 import 'package:ballskin/style/style.dart';
 import 'package:flutter/material.dart';
+
+import '../team_page/team_page.dart';
+import '../team_page/team_standings/team_standings_widget.dart';
 
 class LegauesWidget extends StatefulWidget {
   const LegauesWidget(
@@ -48,7 +50,7 @@ class _CountriesState extends State<LegauesWidget> {
                           return GestureDetector(
                             onTap: () =>
                                 Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => TeamStandingWidget(
+                                    builder: (context) => TeamPageWidget(
                                           competition_id: snapshot.data[index]
                                               ["id"],
                                           competition_name: snapshot.data[index]
