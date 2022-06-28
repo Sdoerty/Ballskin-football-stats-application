@@ -42,4 +42,16 @@ class ApiClient{
       throw Exception('Exception');
     }
   }
+
+  fetchFixtures(competition_id) async{
+    final url = Uri.parse('https://livescore-api.com/api-client/fixtures/matches.json?&key=$_apiKey&secret=$_secretApiKey&competition_id=$competition_id');
+    final response = await http.get(url);
+
+    if(response.statusCode == 200) {
+      final List parsedJson = jsonDecode(response.body)["data"]["fixtures"];
+      return parsedJson;
+    }else{
+      throw Exception('Exception');
+    }
+  }
 }

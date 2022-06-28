@@ -3,6 +3,8 @@ import 'package:ballskin/pages/team_page/team_standings/team_standings_widget.da
 import 'package:ballskin/style/style.dart';
 import 'package:flutter/material.dart';
 
+import 'fixtures/fixtures_widget.dart';
+
 class TeamPageWidget extends StatefulWidget {
   const TeamPageWidget(
       {Key? key,
@@ -57,8 +59,8 @@ class _TeamPageWidgetState extends State<TeamPageWidget> {
           ),
           body: TabBarView(
             children: [
-              Text('aaa'),// Временно
-              TeamStandingWidget(competition_id: widget.competition_id, competition_name: widget.competition_name, season_id: widget.season_id, season_name: widget.season_name),// Временно
+              FixturesWidget(competition_id: widget.competition_id),
+              TeamStandingWidget(competition_id: widget.competition_id, competition_name: widget.competition_name, season_id: widget.season_id, season_name: widget.season_name),
               Text('Сейчас'),
             ],
           ),
