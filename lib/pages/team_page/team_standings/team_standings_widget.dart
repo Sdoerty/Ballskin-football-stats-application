@@ -2,6 +2,8 @@ import 'package:ballskin/api/service.dart';
 import 'package:ballskin/style/style.dart';
 import 'package:flutter/material.dart';
 
+import '../fixtures/selected_team_fixtures.dart';
+
 class TeamStandingWidget extends StatefulWidget {
   const TeamStandingWidget(
       {Key? key,
@@ -128,11 +130,27 @@ class _CountriesState extends State<TeamStandingWidget> {
                                                     style: teamsStyle(),
                                                   ),
                                                 ),
-                                                Container(
-                                                  width: 100,
-                                                  child: Text(
-                                                    "${snapshot.data[index]["name"]}",
-                                                    style: teamsStyle(),
+                                                GestureDetector(
+                                                  onTap: () => Navigator.of(context).push(
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              SelectedTeamFixturesWidget(
+                                                                  competition_id:
+                                                                  widget.competition_id,
+                                                                  team: snapshot.data[index]
+                                                                  ["team_id"],
+                                                                  team_name:
+                                                                  snapshot.data[index]
+                                                                  ["name"]))),
+                                                  child: Container(
+                                                    width: 100,
+                                                    child: Flexible(
+                                                      child: Text(
+                                                        "${snapshot.data[index]["name"]}",
+                                                        overflow: TextOverflow.clip,
+                                                        style: teamsStyle(),
+                                                      ),
+                                                    ),
                                                   ),
                                                 ),
                                               ],
