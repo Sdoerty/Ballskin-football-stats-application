@@ -1,11 +1,13 @@
 import 'package:ballskin/api/service.dart';
+import 'package:ballskin/pages/team_page/fixtures/selected_team_fixtures.dart';
 import 'package:ballskin/style/style.dart';
 import 'package:flutter/material.dart';
 
 class FixturesWidget extends StatefulWidget {
-  const FixturesWidget(
-      {Key? key,
-        required this.competition_id,}) : super(key: key);
+  const FixturesWidget({
+    Key? key,
+    required this.competition_id,
+  }) : super(key: key);
 
   final competition_id;
 
@@ -59,15 +61,43 @@ class _FixturesWidgetState extends State<FixturesWidget> {
                                   height: 3,
                                 ),
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(
-                                      "${snapshot.data[index]["home_name"]}",
-                                      style: subtitleStyle(),
+                                    GestureDetector(
+                                      onTap: () => Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  SelectedTeamFixturesWidget(
+                                                    competition_id:
+                                                        widget.competition_id,
+                                                    team: snapshot.data[index]
+                                                        ["home_id"],
+                                                    team_name:
+                                                        snapshot.data[index]
+                                                            ["home_name"],
+                                                  ))),
+                                      child: Text(
+                                        "${snapshot.data[index]["home_name"]}",
+                                        style: subtitleStyle(),
+                                      ),
                                     ),
-                                    Text(
-                                      "${snapshot.data[index]["away_name"]}",
-                                      style: subtitleStyle(),
+                                    GestureDetector(
+                                      onTap: () => Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  SelectedTeamFixturesWidget(
+                                                      competition_id:
+                                                          widget.competition_id,
+                                                      team: snapshot.data[index]
+                                                          ["away_id"],
+                                                      team_name:
+                                                          snapshot.data[index]
+                                                              ["away_name"]))),
+                                      child: Text(
+                                        "${snapshot.data[index]["away_name"]}",
+                                        style: subtitleStyle(),
+                                      ),
                                     ),
                                   ],
                                 ),
