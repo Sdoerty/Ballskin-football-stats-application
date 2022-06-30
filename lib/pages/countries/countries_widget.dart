@@ -1,6 +1,7 @@
 import 'package:ballskin/api/service.dart';
 import 'package:ballskin/pages/leagues/leagues_widget.dart';
 import 'package:ballskin/style/style.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -51,8 +52,21 @@ class _CountriesState extends State<CountriesWidget> {
                               padding: const EdgeInsets.all(15.0),
                               child: Row(
                                 children: [
+                                  Container(
+                                    width: 70,
+                                    height: 40,
+                                    child: CachedNetworkImage(
+                                      imageUrl: "https://livescore-api.com/api-client/countries/flag.json?&key=o77eB07ZqirxyShu&secret=f8bK5NOObpYQn23Lab0Lc7LCpcaY5rsl&country_id=${snapshot.data[index]["id"]}",
+                                      progressIndicatorBuilder: (context, url, downloadProgress) =>
+                                          Center(child: CircularProgressIndicator(value: downloadProgress.progress)),
+                                      errorWidget: (context, url, error) => Image.asset('images/no_flag.png'),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
                                   Flexible(
-                                      child: Text("${snapshot.data[index]["name"]}", style: countriesStyle(),))
+                                      child: Text("${snapshot.data[index]["name"]}", style: countriesStyle(),)),
                                 ],
                               ),
                             ),
