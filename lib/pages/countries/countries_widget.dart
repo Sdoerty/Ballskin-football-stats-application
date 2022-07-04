@@ -4,27 +4,37 @@ import 'package:ballskin/style/style.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
-class CountriesWidget extends StatefulWidget {
+class CountriesModel extends ChangeNotifier{
+  final apiClient = ApiClient();
+
+  returnCountryFlag(id){
+    final countryFlag = "https://livescore-api.com/api-client/countries/flag.json?&key=o77eB07ZqirxyShu&secret=f8bK5NOObpYQn23Lab0Lc7LCpcaY5rsl&country_id=$id";
+    return countryFlag;
+  }
+
+}
+
+class CountriesWidget extends StatelessWidget {
   const CountriesWidget({Key? key}) : super(key: key);
 
   @override
-  State<CountriesWidget> createState() => _CountriesState();
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+        create: (context) => CountriesModel(),
+        child: DisplayCountries());
+  }
 }
 
-class _CountriesState extends State<CountriesWidget> {
-  final apiClient = ApiClient();
-
-  @override
-  void initState() {
-    super.initState();
-    apiClient.fetchCountries();
-  }
+class DisplayCountries extends StatelessWidget {
+  const DisplayCountries({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final countryModel = context.read<CountriesModel>();
     return FutureBuilder(
-        future: apiClient.fetchCountries(),
+        future: countryModel.apiClient.fetchCountries(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasData) {
@@ -39,9 +49,9 @@ class _CountriesState extends State<CountriesWidget> {
                         child: Card(
                           borderOnForeground: true,
                           shape: RoundedRectangleBorder(
-                            side: BorderSide(color: Colors.white, width: 2),
+                              side: BorderSide(color: Colors.white, width: 2),
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0))),
+                              BorderRadius.all(Radius.circular(10.0))),
                           color: Color.fromRGBO(28, 27, 31, 1),
                           child: ClipRRect(
                             borderRadius: BorderRadius.only(
@@ -52,19 +62,28 @@ class _CountriesState extends State<CountriesWidget> {
                               padding: const EdgeInsets.all(15.0),
                               child: Row(
                                 children: [
-                                  Container(
-                                    width: 70,
-                                    height: 40,
-                                    child: CachedNetworkImage(
-                                      imageUrl: "https://livescore-api.com/api-client/countries/flag.json?&key=o77eB07ZqirxyShu&secret=f8bK5NOObpYQn23Lab0Lc7LCpcaY5rsl&country_id=${snapshot.data[index]["id"]}",
-                                      progressIndicatorBuilder: (context, url, downloadProgress) =>
-                                          Center(child: CircularProgressIndicator(value: downloadProgress.progress)),
-                                      errorWidget: (context, url, error) => Image.asset('images/no_flag.png'),
-                                    ),
+/*                                  Container(
+                                      width: 70,
+                                      height: 40,
+                                      child: Image.network("${countryModel.returnCountryFlag(snapshot.data[index]["id"])}",
+                                      // child: Image.network("https://livescore-api.com/api-client/countries/flag.json?&key=o77eB07ZqirxyShu&secret=f8bK5NOObpYQn23Lab0Lc7LCpcaY5rsl&country_id=${snapshot.data[index]["id"]}",
+                                        loadingBuilder: (BuildContext context, Widget child,
+                                            ImageChunkEvent? loadingProgress) {
+                                          if (loadingProgress == null) return child;
+                                          return Center(
+                                            child: CircularProgressIndicator(
+                                            ),
+                                          );
+                                        },
+                                        errorBuilder:
+                                            (BuildContext context, Object exception, StackTrace? stackTrace) {
+                                          return Image.asset('images/no_flag.png');
+                                        },
+                                      )
                                   ),
                                   SizedBox(
                                     width: 10,
-                                  ),
+                                  ),*/
                                   Flexible(
                                       child: Text("${snapshot.data[index]["name"]}", style: countriesStyle(),)),
                                 ],
@@ -93,3 +112,4 @@ class _CountriesState extends State<CountriesWidget> {
         });
   }
 }
+

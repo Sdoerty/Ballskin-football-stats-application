@@ -12,8 +12,14 @@ class ApiClient{
     final response = await http.get(url);
 
     if(response.statusCode == 200) {
-      final List parsedJson = jsonDecode(response.body)["data"]["country"];
-      return parsedJson;
+      try{
+        final List parsedJson = jsonDecode(response.body)["data"]["country"];
+        return parsedJson;
+      }catch(e){
+        return e;
+      }
+    }if(response.statusCode == 500) {
+      throw Exception('500');
     }else{
       throw Exception('Exception');
     }
