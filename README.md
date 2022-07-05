@@ -1,16 +1,18 @@
-# ballskin
+Приложение футбольной статистики основано на Live Score Api: 
+https://live-score-api.com/documentation/reference
+Для теста нужно получить apiKey и secretApiKey и вставить их в соответствующие константы в api/service.dart
 
-football stats application
+1. Отображение список всех стран:
+![Alt text](https://github.com/Sdoerty/Ballskin-football-stats-application/blob/main/lib/ScreenshotsBallskin/1.png)
 
-## Getting Started
+2. Отображение всех действующих футбольных лиг в зависимости вот выбранной страны:
+![Alt text](https://github.com/Sdoerty/Ballskin-football-stats-application/blob/main/lib/ScreenshotsBallskin/2.png)
 
-This project is a starting point for a Flutter application.
+3. Отображение таблицы команд, выбранной лиги:
+![Alt text](https://github.com/Sdoerty/Ballskin-football-stats-application/blob/main/lib/ScreenshotsBallskin/3.png)
 
-A few resources to get you started if this is your first Flutter project:
+4. Отображение расписание всех матчей данной лиги:
+![Alt text](https://github.com/Sdoerty/Ballskin-football-stats-application/blob/main/lib/ScreenshotsBallskin/4.png)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+5. Отображение расписания только для одной команды, которую можно выбрать в пункте 3 или 4:
+![Alt text](https://github.com/Sdoerty/Ballskin-football-stats-application/blob/main/lib/ScreenshotsBallskin/5png)
